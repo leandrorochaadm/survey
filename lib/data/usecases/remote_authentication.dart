@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:survey/domain/entities/entities.dart';
+import 'package:survey/domain/models/models.dart';
 
 import '../../domain/helpers/helpers.dart';
 import '../../domain/usecases/usecases.dart';
@@ -21,7 +22,7 @@ class RemoteAuthentication implements Authenticaton {
         method: 'post',
         body: body,
       );
-      return AccountEntity.fromJson(httpResponse);
+      return RemoteAccountModel.fromJson(httpResponse).toEntity();
     } on HttpError catch (error) {
       throw error == HttpError.unauthorized
           ? DomainError.invalidCredentials

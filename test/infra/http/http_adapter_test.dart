@@ -16,7 +16,12 @@ class HttpAdapter {
     @required String url,
     @required String method,
   }) async {
-    client.post(url);
+    final headers = {
+      'content-type': 'application/json',
+      'accept': 'application/json',
+    };
+
+    client.post(url, headers: headers);
   }
 }
 
@@ -32,7 +37,15 @@ void main() {
       await sut.request(url: url, method: 'post');
 
       //assert
-      verify(client.post(url));
+      verify(
+        client.post(
+          url,
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+          },
+        ),
+      );
     });
   });
 }

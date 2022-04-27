@@ -26,12 +26,18 @@ class HttpAdapter {
 }
 
 void main() {
+  HttpAdapter sut;
+  ClienteSpy client;
+  String url;
+  setUp(() {
+    client = ClienteSpy();
+    sut = HttpAdapter(client);
+    url = faker.internet.httpUrl();
+  });
+
   group('post', () {
     test('Shoudl call post with correct values', () async {
       // arrange
-      final client = ClienteSpy();
-      final sut = HttpAdapter(client);
-      final url = faker.internet.httpUrl();
 
       // action
       await sut.request(url: url, method: 'post');

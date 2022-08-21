@@ -2,7 +2,7 @@
     package="com.lionmagesoftware.survey">
    <application
         android:label="survey"
-        android:name="${applicationName}"
+        android:name="io.flutter.app.FlutterApplication"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -6,8 +6,14 @@ import '../protocols/protocols.dart';
 
 class LoginState {
   String emailError;
+  String email;
   String passwordError;
-  bool get isFormValid => false;
+  String password;
+  bool get isFormValid =>
+      emailError == null &&
+      passwordError == null &&
+      email != null &&
+      password != null;
 }
 
 class StreamLoginPresenter {
@@ -27,12 +33,14 @@ class StreamLoginPresenter {
 
   void _update() => _controller.add(_state);
 
-  void validadeEmail(String email) {
+  void validateEmail(String email) {
+    _state.email = email;
     _state.emailError = validation.validade(field: 'email', value: email);
     _update();
   }
 
   void validatePassword(String password) {
+    _state.password = password;
     _state.passwordError =
         validation.validade(field: 'password', value: password);
     _update();

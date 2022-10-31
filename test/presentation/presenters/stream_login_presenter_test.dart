@@ -31,7 +31,7 @@ void main() {
   });
 
   test('Should call Validation with correct email', () {
-    sut.validadeEmail(email);
+    sut.validateEmail(email);
 
     verify(validation.validade(field: 'email', value: email)).called(1);
   });
@@ -44,8 +44,8 @@ void main() {
     sut.isFormValidStream
         .listen(expectAsync1((isValid) => expect(isValid, false)));
 
-    sut.validadeEmail(email);
-    sut.validadeEmail(email);
+    sut.validateEmail(email);
+    sut.validateEmail(email);
   });
 
   test('Should emit null if email validation succeeds', () {
@@ -53,8 +53,8 @@ void main() {
     sut.isFormValidStream
         .listen(expectAsync1((isValid) => expect(isValid, false)));
 
-    sut.validadeEmail(email);
-    sut.validadeEmail(email);
+    sut.validateEmail(email);
+    sut.validateEmail(email);
   });
 
   test('Should call Validation with correct password', () {
@@ -94,7 +94,18 @@ void main() {
     sut.isFormValidStream
         .listen(expectAsync1((isValid) => expect(isValid, false)));
 
-    sut.validadeEmail(email);
+    sut.validateEmail(email);
+    sut.validatePassword(password);
+  });
+
+  test('Should emit password error if validation fails', () async {
+    sut.emailErrorStream.listen(expectAsync1((error) => expect(error, null)));
+    sut.passwordErrorStream
+        .listen(expectAsync1((error) => expect(error, null)));
+    expectLater(sut.isFormValidStream, emitsInOrder([false, true]));
+
+    sut.validateEmail(email);
+    await Future.delayed(Duration.zero);
     sut.validatePassword(password);
   });
 }

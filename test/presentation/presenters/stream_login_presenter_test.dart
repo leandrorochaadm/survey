@@ -177,4 +177,11 @@ void main() {
 
     await sut.auth();
   });
+
+  test('should not emit after dispose', () {
+    expectLater(sut.emailErrorStream, neverEmits(null));
+
+    sut.dispose();
+    sut.validateEmail(email);
+  });
 }

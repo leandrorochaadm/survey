@@ -13,6 +13,7 @@ void main() {
   LoginPresenter presenter;
   StreamController<String> emailErrorController;
   StreamController<String> passwordErrorController;
+  StreamController<bool> isFormValidController;
 
   Future loadPage(WidgetTester tester) async {
     presenter = LoginPresenterSpy();
@@ -24,6 +25,10 @@ void main() {
     when(presenter.passwordErrorStream)
         .thenAnswer((_) => passwordErrorController.stream);
 
+    isFormValidController = StreamController<bool>();
+    when(presenter.isFormValidStream)
+        .thenAnswer((_) => isFormValidController.stream);
+
     final loginPage = MaterialApp(home: LoginPage(presenter));
     await tester.pumpWidget(loginPage);
   }
@@ -31,6 +36,7 @@ void main() {
   tearDown(() {
     emailErrorController.close();
     passwordErrorController.close();
+    isFormValidController.close();
   });
 
   testWidgets('Should load with', (WidgetTester tester) async {
@@ -153,5 +159,16 @@ void main() {
       reason:
           'when a TextFormField has only one text child, means it has no errors, since one of the childs is always the hint text',
     );
+  });
+
+  testWidgets('Should enable button if form is valid ',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    isFormValidController.add(true);
+    await tester.pump();
+
+    final button = tester.widget<RaisedButton>(find.byType(RaisedButton));
+    expect(button.onPressed, isNotNull);
   });
 }

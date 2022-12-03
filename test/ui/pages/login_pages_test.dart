@@ -21,7 +21,7 @@ void main() {
         .thenAnswer((_) => emailErrorController.stream);
 
     passwordErrorController = StreamController<String>();
-    when(presenter.emailErrorStream)
+    when(presenter.passwordErrorStream)
         .thenAnswer((_) => passwordErrorController.stream);
 
     final loginPage = MaterialApp(home: LoginPage(presenter));
@@ -121,5 +121,37 @@ void main() {
     await tester.pump();
 
     expect(find.text('any error'), findsOneWidget);
+  });
+
+  testWidgets('Should present no error if password is valid',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    passwordErrorController.add(null);
+    await tester.pump();
+
+    expect(
+      find.descendant(
+          of: find.bySemanticsLabel('Senha'), matching: find.byType(Text)),
+      findsOneWidget,
+      reason:
+          'when a TextFormField has only one text child, means it has no errors, since one of the childs is always the hint text',
+    );
+  });
+
+  testWidgets('Should present no error if password is valid',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    passwordErrorController.add('');
+    await tester.pump();
+
+    expect(
+      find.descendant(
+          of: find.bySemanticsLabel('Senha'), matching: find.byType(Text)),
+      findsOneWidget,
+      reason:
+          'when a TextFormField has only one text child, means it has no errors, since one of the childs is always the hint text',
+    );
   });
 }

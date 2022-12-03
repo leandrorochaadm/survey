@@ -9,7 +9,7 @@
 6. ✅ Remover mensagem de erro se o emall for válido
 7. ✅ Validar senha quadno o usuário digitar no campo
 8. ✅ Mostar mensagem de erro se a senha for inválida
-9. Remover mensagem de erro se a senha for válida
+9. ✅ Remover mensagem de erro se a senha for válida
 10. Habilitar o botão de fazer login se algum campo for inválido
 11. Desabilitar o botão de fazer login se algum campo for inválido
 12. Exibir mensagem de erro caso o login falhe

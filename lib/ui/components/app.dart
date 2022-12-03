@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import '../pages/pages.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp();
-
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Enquete',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Text("home"),
+      home: LoginPage(),
     );
   }
 }

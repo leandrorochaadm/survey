@@ -119,6 +119,14 @@ void main() {
       expect(future, throwsA(HttpError.forbidden));
     });
 
+    test('Should return BadRequestError if post returns 404', () {
+      mockResponse(404);
+
+      final future = sut.request(url: url, method: 'post');
+
+      expect(future, throwsA(HttpError.notFound));
+    });
+
     test('Should return ServerError if post returns 500', () {
       mockResponse(500);
 

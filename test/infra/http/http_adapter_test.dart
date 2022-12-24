@@ -42,7 +42,7 @@ void main() {
   });
 
   group('post', () {
-    test('Shoudl call post with correct values', () async {
+    test('Should call post with correct values', () async {
       // arrange
       when(client.post(any,
               body: anyNamed('body'), headers: anyNamed('headers')))
@@ -63,7 +63,7 @@ void main() {
       );
     });
 
-    test('Shoudl call post without body', () async {
+    test('Should call post without body', () async {
       when(client.post(any, headers: anyNamed('headers')))
           .thenAnswer((_) async => Response('{"any_key":"any_value"}', 200));
 
@@ -88,7 +88,7 @@ void main() {
       expect(response, {"any_key": "any_value"});
     });
 
-    test('Should return data if post returns 200 with no data', () async {
+    test('Should return null if post returns 200 with no data', () async {
       when(client.post(any, headers: anyNamed('headers')))
           .thenAnswer((_) async => Response('', 200));
 

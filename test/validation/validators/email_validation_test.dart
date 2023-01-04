@@ -1,3 +1,4 @@
+import 'package:survey/presentation/protocols/protocols.dart';
 import 'package:survey/validation/validators/validators.dart';
 import 'package:test/test.dart';
 
@@ -21,6 +22,6 @@ main() {
   });
 
   test('Shold return error is email is invalid', () {
-    expect(sut.validate('test'), 'Campo inválido');
+    expect(sut.validate('test'), ValidationError.invalidField);
   });
 }

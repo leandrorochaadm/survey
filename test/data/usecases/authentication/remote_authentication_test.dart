@@ -75,11 +75,7 @@ void main() {
   });
 
   test('Should throw UnexpectedError if HttpClient return 500', () async {
-    when(httpClient.request(
-            url: anyNamed('url'),
-            method: anyNamed('method'),
-            body: anyNamed('body')))
-        .thenThrow(HttpError.serverError);
+    mockHttpError(HttpError.serverError);
 
     final future = sut.auth(params);
 

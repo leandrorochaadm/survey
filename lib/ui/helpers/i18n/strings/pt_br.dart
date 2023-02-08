@@ -8,4 +8,8 @@ class PtBr implements Translations {
 
   @override
   String get addAccount => 'Criar Conta';
+  String get confirmPassword => 'Confirmar senha';
+  String get name => 'Nome';
+  String get password => 'Senha';
+  String get login => 'Login';
 }

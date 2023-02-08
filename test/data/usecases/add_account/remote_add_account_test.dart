@@ -44,7 +44,7 @@ void main() {
       passwordConfirmation: faker.internet.password(),
     );
 
-    // mockHttpData(mockValidData());
+    mockHttpData(mockValidData());
   });
 
   test('Should call HttpClient correct values', () async {
@@ -97,5 +97,17 @@ void main() {
     final future = sut.add(params);
 
     expect(future, throwsA(DomainError.emailInUse));
+  });
+
+  test('Should return an Account if HttpClient return 200', () async {
+    // arrange
+    final validData = mockValidData();
+    mockHttpData(validData);
+
+    // action
+    final account = await sut.add(params);
+
+    // assert
+    expect(account.token, validData['accessToken']);
   });
 }

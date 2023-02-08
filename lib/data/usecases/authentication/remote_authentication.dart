@@ -1,8 +1,8 @@
 import 'package:meta/meta.dart';
-import 'package:survey/domain/entities/entities.dart';
-import 'package:survey/domain/models/models.dart';
 
+import '../../../domain/entities/entities.dart';
 import '../../../domain/helpers/helpers.dart';
+import '../../../domain/models/models.dart';
 import '../../../domain/usecases/usecases.dart';
 import '../../http/http.dart';
 

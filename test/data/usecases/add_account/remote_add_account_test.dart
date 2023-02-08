@@ -2,6 +2,7 @@ import 'package:faker/faker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:survey/data/http/http.dart';
 import 'package:survey/data/usecases/usecases.dart';
+import 'package:survey/domain/helpers/helpers.dart';
 import 'package:survey/domain/usecases/usecases.dart';
 import 'package:test/test.dart';
 
@@ -61,5 +62,16 @@ void main() {
         'passwordConfirmation': params.passwordConfirmation,
       },
     ));
+  });
+
+  test('Should throw UnexpectedError if HttpClient returns 400', () async {
+    // arrange
+    mockHttpError(HttpError.badRequest);
+
+    // action
+    final future = sut.add(params);
+
+    // assert
+    expect(future, throwsA(DomainError.unexpected));
   });
 }

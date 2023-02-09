@@ -3,6 +3,7 @@ abstract class Translations {
   String get msgInvalidCredentials;
   String get msgInvalidField;
   String get msgUnexpected;
+  String get msgEmailInUse;
 
   String get addAccount;
   String get confirmPassword;

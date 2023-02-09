@@ -9,4 +9,5 @@ abstract class Translations {
   String get name;
   String get password;
   String get login;
+  String get email;
 }

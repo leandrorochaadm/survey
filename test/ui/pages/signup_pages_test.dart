@@ -19,6 +19,7 @@ void main() {
   StreamController<UIError> mainErrorController;
   StreamController<bool> isFormValidController;
   StreamController<bool> isLoadingController;
+  StreamController<String> navigatorToController;
 
   void initStreams() {
     nameErrorController = StreamController<UIError>();
@@ -28,6 +29,7 @@ void main() {
     mainErrorController = StreamController<UIError>();
     isFormValidController = StreamController<bool>();
     isLoadingController = StreamController<bool>();
+    navigatorToController = StreamController<String>();
   }
 
   void mockStreams() {
@@ -45,6 +47,8 @@ void main() {
         .thenAnswer((_) => isFormValidController.stream);
     when(presenter.isLoadingStream)
         .thenAnswer((_) => isLoadingController.stream);
+    when(presenter.navigateToStream)
+        .thenAnswer((_) => navigatorToController.stream);
   }
 
   void closeStreams() {
@@ -55,6 +59,7 @@ void main() {
     mainErrorController.close();
     isFormValidController.close();
     isLoadingController.close();
+    navigatorToController.close();
   }
 
   Future loadPage(WidgetTester tester) async {
@@ -68,6 +73,10 @@ void main() {
         GetPage(
           name: '/signup',
           page: () => SignUpPage(presenter),
+        ),
+        GetPage(
+          name: '/any_route',
+          page: () => Scaffold(body: Text('fake page')),
         ),
       ],
     );
@@ -305,5 +314,27 @@ void main() {
     await tester.pump();
 
     expect(find.text('Algo errado aconteceu. Tente novamente'), findsOneWidget);
+  });
+
+  testWidgets('Should change page', (WidgetTester tester) async {
+    await loadPage(tester);
+
+    navigatorToController.add('/any_route');
+    await tester.pumpAndSettle();
+
+    expect(Get.currentRoute, '/any_route');
+    expect(find.text('fake page'), findsOneWidget);
+  });
+
+  testWidgets('Should not change page', (WidgetTester tester) async {
+    await loadPage(tester);
+
+    navigatorToController.add('');
+    await tester.pump();
+    expect(Get.currentRoute, '/signup');
+
+    navigatorToController.add(null);
+    await tester.pump();
+    expect(Get.currentRoute, '/signup');
   });
 }

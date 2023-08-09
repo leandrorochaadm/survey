@@ -1,16 +1,26 @@
-# survey
+# Enquete
 
-A new Flutter project.
+### App de enquetes de pesquisa, com login e cadastro de enquetes.
 
-## Getting Started
+## Recursos utilizados:
+* Integração com API com package Dio;
+* Gerenciador de estado (GetX);
+* Clean architecture;
+* testes unitários e testes de widgets;
+* Git e Git Flow;
 
-This project is a starting point for a Flutter application.
+## Requisitos
 
-A few resources to get you started if this is your first Flutter project:
+Para executar o aplicativo, os seguintes requisitos devem ser atendidos:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Flutter  1.20.4
+- Dart SDK version: ">=2.7.0 <3.0.0"
+- Android SDK (for Android development)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Começando
+
+Para começar a usar o aplicativo:
+
+1. Clone o repositório e navegue até o diretório do projeto.
+2. Instale os pacotes necessários usando `flutter pub get`.
+3. Execute o aplicativo `flutter run`
